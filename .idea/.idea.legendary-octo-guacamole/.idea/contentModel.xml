@@ -9,6 +9,7 @@
         <e p="Scripts" t="Include">
           <e p="CubeData.cs" t="Include" />
           <e p="CubeMoveSystem.cs" t="Include" />
+          <e p="ECSInterface.cs" t="Include" />
           <e p="ECSManager.cs" t="Include" />
           <e p="Move.cs" t="Include" />
           <e p="MoveSystem.cs" t="Include" />
