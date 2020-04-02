@@ -273,8 +273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1045315051}
-  - component: {fileID: 1045315050}
-  - component: {fileID: 1045315052}
+  - component: {fileID: 1045315053}
   m_Layer: 0
   m_Name: Spawner
   m_TagString: Untagged
@@ -282,19 +281,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1045315050
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1045315049}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8b43822dffda3f24380af0054ef2a23c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  sheepPrefab: {fileID: 2026991542, guid: ed57f85e128444af2aecca62ff336fea, type: 3}
 --- !u!4 &1045315051
 Transform:
   m_ObjectHideFlags: 0
@@ -309,7 +295,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1045315052
+--- !u!114 &1045315053
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -318,7 +304,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1045315049}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f1170a3ceb601714abf86eabfc3f5e1b, type: 3}
+  m_Script: {fileID: 11500000, guid: e1e0efab17c35024c8020252a32a20fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sheepPrefab: {fileID: 2026991542, guid: 6be4d9fb5c2721a4c91dca4004e82d29, type: 3}
@@ -440,8 +426,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1687258581}
-  m_LocalRotation: {x: 0.7071068, y: -0.00000005215407, z: 0.00000005215407, w: 0.7071068}
-  m_LocalPosition: {x: 0, y: 80, z: 0}
+  m_LocalRotation: {x: -0.2526282, y: 0.34401038, z: -0.09665266, w: -0.899163}
+  m_LocalPosition: {x: 79.21905, y: 109.40671, z: -95.95039}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

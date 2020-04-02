@@ -7,10 +7,13 @@
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
+          <e p="CubeData.cs" t="Include" />
+          <e p="CubeMoveSystem.cs" t="Include" />
+          <e p="ECSManager.cs" t="Include" />
           <e p="Move.cs" t="Include" />
+          <e p="MoveSystem.cs" t="Include" />
+          <e p="SheepData.cs" t="Include" />
           <e p="SimpleCameraController.cs" t="Include" />
-          <e p="Spawn.cs" t="Include" />
-          <e p="SpawnDOTS.cs" t="Include" />
         </e>
       </e>
       <e p="legendary-octo-guacamole.sln" t="IncludeFlat" />
