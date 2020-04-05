@@ -11,7 +11,9 @@ public class ECSInterface : MonoBehaviour
     private World world;
     
     public GameObject sheepPrefab;
-    private const float range = 40;
+    public GameObject tankPrefab;
+    public GameObject palmPrefab;
+    private const float range = 10;
     
     private void Start()
     {
@@ -30,19 +32,42 @@ public class ECSInterface : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            AddSheep();
+            AddTank();
+        }
+        
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            AddPalm();
         }
     }
 
 
-    private void AddSheep()
+    private void AddTank()
+    {
+        Vector3 pos = new Vector3(UnityEngine.Random.Range(-10,10), 0, UnityEngine.Random.Range(-10,10));
+        Instantiate(tankPrefab, pos, Quaternion.identity);
+        
+    }
+
+    private void AddPalm()
     {
         EntityManager manager = World.DefaultGameObjectInjectionWorld.EntityManager;
         var settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, null);
-        var prefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(sheepPrefab, settings);
+        var prefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(palmPrefab, settings);
         var instance = manager.Instantiate(prefab);
-        var position = transform.TransformPoint(new float3(UnityEngine.Random.Range(-range, range), UnityEngine.Random.Range(0, range*2), UnityEngine.Random.Range(-range, range)));
+        var position = transform.TransformPoint(new float3(UnityEngine.Random.Range(-range, range), 0, UnityEngine.Random.Range(-range, range)));
         manager.SetComponentData(instance, new Translation {Value = position});
         manager.SetComponentData(instance, new Rotation {Value = new quaternion(0,0,0,0)});
+        
+        // EntityManager manager = World.DefaultGameObjectInjectionWorld.EntityManager;
+        // var settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, null);
+        // var prefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(palmPrefab, settings);
+        //
+        //
+        //     var instance = manager.Instantiate(prefab);
+        //     var position = transform.TransformPoint(new float3(UnityEngine.Random.Range(-range, range), UnityEngine.Random.Range(0, range*2), UnityEngine.Random.Range(-range, range)));
+        //     manager.SetComponentData(instance, new Translation {Value = position});
+        //     manager.SetComponentData(instance, new Rotation {Value = new quaternion(0,0,0,0)});
+        
     }
 }

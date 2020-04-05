@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="C:\Users\Trev\.Rider2019.3\system\extResources" t="IncludeRecursive" />
-    <e p="C:\Users\Trev\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_legendary-octo-guacamole.-1301223180.00" t="ExcludeRecursive" />
-    <e p="C:\Users\Trev\Documents\!GameDev\legendary-octo-guacamole" t="IncludeRecursive">
+    <e p="$PROJECT_DIR$" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
         <e p="Scripts" t="Include">
+          <e p="CreateCapsuleSystem.cs" t="Include" />
+          <e p="CreateSheepSystem.cs" t="Include" />
           <e p="CubeData.cs" t="Include" />
           <e p="CubeMoveSystem.cs" t="Include" />
           <e p="ECSInterface.cs" t="Include" />
           <e p="ECSManager.cs" t="Include" />
           <e p="Move.cs" t="Include" />
           <e p="MoveSystem.cs" t="Include" />
+          <e p="ResourceHolder.cs" t="Include" />
           <e p="SheepData.cs" t="Include" />
           <e p="SimpleCameraController.cs" t="Include" />
         </e>
@@ -20,7 +21,9 @@
       <e p="legendary-octo-guacamole.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
-      <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="Temp/bin" t="ExcludeRecursive" />
     </e>
+    <e p="$USER_HOME$/Library/Caches/Rider2019.3/extResources" t="IncludeRecursive" />
+    <e p="$USER_HOME$/Library/Caches/Rider2019.3/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_legendary-octo-guacamole.994507596.00" t="ExcludeRecursive" />
   </component>
 </project>
