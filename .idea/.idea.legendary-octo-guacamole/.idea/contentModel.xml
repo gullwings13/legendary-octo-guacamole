@@ -4,18 +4,22 @@
     <e p="$PROJECT_DIR$" t="IncludeRecursive">
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="ECSManager.cs" t="Include" />
         <e p="Scripts" t="Include">
+          <e p="AsteroidData.cs" t="Include" />
           <e p="CreateCapsuleSystem.cs" t="Include" />
           <e p="CreateSheepSystem.cs" t="Include" />
+          <e p="CreateTankSystem.cs" t="Include" />
           <e p="CubeData.cs" t="Include" />
           <e p="CubeMoveSystem.cs" t="Include" />
           <e p="ECSInterface.cs" t="Include" />
-          <e p="ECSManager.cs" t="Include" />
+          <e p="ECSManagerTwo.cs" t="Include" />
           <e p="Move.cs" t="Include" />
           <e p="MoveSystem.cs" t="Include" />
           <e p="ResourceHolder.cs" t="Include" />
           <e p="SheepData.cs" t="Include" />
           <e p="SimpleCameraController.cs" t="Include" />
+          <e p="TankData.cs" t="Include" />
         </e>
       </e>
       <e p="legendary-octo-guacamole.sln" t="IncludeFlat" />

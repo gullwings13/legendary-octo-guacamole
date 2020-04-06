@@ -7,7 +7,7 @@ using Unity.Mathematics;
 using Unity.Transforms;
 using UnityEngine.Rendering;
 
-public class ECSManager : MonoBehaviour
+public class ECSManagerTwo : MonoBehaviour
 {
     private EntityManager manager;
     public GameObject sheepPrefab;

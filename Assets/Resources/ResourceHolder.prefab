@@ -49,3 +49,14 @@ MonoBehaviour:
   sheepMesh: {fileID: 8809228284901577735, guid: 6f1b2d807ff1b4e2783a6587fb8ceadb,
     type: 3}
   sheepMaterial: {fileID: 2100000, guid: 10484d7a6ce250741ad1c8dc9982def9, type: 2}
+  tankChassisMesh: {fileID: 6815173180928607309, guid: fe1492175c074485687c9bf6a50c49a0,
+    type: 3}
+  tankLeftMesh: {fileID: 4214266722782416146, guid: fe1492175c074485687c9bf6a50c49a0,
+    type: 3}
+  tankRightMesh: {fileID: -6455337513073775582, guid: fe1492175c074485687c9bf6a50c49a0,
+    type: 3}
+  tankTurretMesh: {fileID: -476746044771901990, guid: fe1492175c074485687c9bf6a50c49a0,
+    type: 3}
+  tankGreenMaterial: {fileID: 2100000, guid: ac48ae7491d2a4604a4e1c4674448bba, type: 2}
+  tankGreyMaterial: {fileID: 2100000, guid: d1f25c94d9e834ac7b635782ba62c1d1, type: 2}
+  tankLightMaterial: {fileID: 2100000, guid: 854e99d8145c94a5fb2625dae581bc24, type: 2}
