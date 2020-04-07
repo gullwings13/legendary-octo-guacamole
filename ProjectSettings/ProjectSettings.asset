@@ -656,6 +656,7 @@ PlayerSettings:
       daydreamIconForeground: {fileID: 0}
       daydreamIconBackground: {fileID: 0}
   cloudServicesEnabled:
+    Build: 1
     UNet: 1
   luminIcon:
     m_Name: 
@@ -669,10 +670,10 @@ PlayerSettings:
     m_VersionCode: 1
     m_VersionName: 
   apiCompatibilityLevel: 6
-  cloudProjectId: 
+  cloudProjectId: 215ead1c-5b40-4c2b-8d8f-0a1f3a3abe42
   framebufferDepthMemorylessMode: 0
-  projectName: 
-  organizationId: 
+  projectName: legendary-octo-guacamole
+  organizationId: trevor-3927966
   cloudEnabled: 0
   enableNativePlatformBackendsForNewInputSystem: 0
   disableOldInputManagerSupport: 0

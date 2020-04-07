@@ -22,9 +22,9 @@ public class ECSManager : MonoBehaviour
         for (int i = 0; i < numAsteroids; i++)
         {
             var instance = manager.Instantiate(prefab);
-            float x = Mathf.Sin(i) * UnityEngine.Random.Range(7, 770);
+            float x = Mathf.Sin(i) * UnityEngine.Random.Range(70, 770);
             float y = UnityEngine.Random.Range(-20f, 20f);
-            float z = Mathf.Cos(i) * UnityEngine.Random.Range(7, 770);
+            float z = Mathf.Cos(i) * UnityEngine.Random.Range(70, 770);
             float3 position = transform.TransformPoint(new float3(x, y, z));
             manager.SetComponentData(instance, new Translation {Value = position});
 
@@ -46,7 +46,8 @@ public class ECSManager : MonoBehaviour
 
             float3 pivot = new float3(0, 0, 0);
             float3 _axisAngle = position - pivot;
-            float tweakValue = 1.00f;
+            float tweakRange = 0.1f;
+            float tweakValue = UnityEngine.Random.Range(1 - tweakRange, 1 + tweakRange);
             // float initialSpeed = 450f;
             float dist = math.distance(position, pivot);
 
@@ -58,16 +59,19 @@ public class ECSManager : MonoBehaviour
             
             // Debug.Log(rotationalSpeed);
 
-            var initialVector = math.mul(quaternion.AxisAngle(
-                new float3(0, 1, 0),
-                // (_axisAngle / _axisAngle), 
-                // 0.000001f
-                1f
-            ), position - pivot);
-            // + position;
+            // var initialVector = math.mul(quaternion.AxisAngle(
+            //     new float3(0, 1, 0),
+            //     // (_axisAngle / _axisAngle), 
+            //     // 0.000001f
+            //     1f
+            // ), position - pivot);
+            // // + position;
+            //
+            //
+            // var initalVectorNormed = math.normalize(initialVector);
 
-
-            var initalVectorNormed = math.normalize(initialVector);
+            var initialVector = math.cross(new float3(0, 1, 0), math.normalize(position));
+            
             // Debug.Log(initalVectorNormed);
             manager.SetComponentData(instance, new AsteroidData
             {
@@ -75,7 +79,7 @@ public class ECSManager : MonoBehaviour
                 // velocity = new float3(UnityEngine.Random.Range(-initialSpeed, initialSpeed),0,UnityEngine.Random.Range(-initialSpeed, initialSpeed) )});
                 // velocity = initialVector
                 // velocity = float3.zero
-                velocity = initalVectorNormed * rotationalSpeed * tweakValue
+                velocity = initialVector * rotationalSpeed * tweakValue
             });
         }
     }
