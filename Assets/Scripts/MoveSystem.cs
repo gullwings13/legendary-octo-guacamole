@@ -26,16 +26,16 @@ public class MoveSystem : JobComponentSystem
                 
 
                 // position.Value = math.mul(quaternion.AxisAngle(
-                    // new float3(0, 1, 0),
-                    // (asteroidData.axisAngle / asteroidData.axisAngle),
-                    // rotationalSpeed), position.Value - pivot) + pivot;
+                //     new float3(0, 1, 0),
+                //     (asteroidData.axisAngle / asteroidData.axisAngle),
+                //     rotationalSpeed), position.Value - pivot) + pivot;
 
                     float3 diff = position.Value - targetLocation;
 
                     float dist = math.distance(position.Value, targetLocation);
                     float3 direction = math.normalize(diff);
-                    float3 movementVector = asteroidData.velocity + 6.7f * (100 * 100 / (dist * dist));
-                    asteroidData.velocity += movementVector;
+                    float3 movementVector = asteroidData.velocity +  -direction * ( 10 * (1 * 100 / (dist * dist)));
+                    asteroidData.velocity = movementVector;
 
                     position.Value += asteroidData.velocity;
 
