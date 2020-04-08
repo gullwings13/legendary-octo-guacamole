@@ -19,13 +19,29 @@ public class UIMaster : MonoBehaviour
     private void Start()
     {
         verticalLayoutGroup = new GameObject("VerticalLayoutGroup", typeof(VerticalLayoutGroup));
-        verticalLayoutGroup.transform.parent = mainCanvas.transform;
+        verticalLayoutGroup.transform.SetParent(mainCanvas.transform);
         var vertGroup = verticalLayoutGroup.GetComponent<VerticalLayoutGroup>();
         vertGroup.childControlHeight = true;
         vertGroup.childControlWidth = true;
         vertGroup.childForceExpandHeight = true;
         vertGroup.childForceExpandWidth = true;
+        vertGroup.padding.Add(new Rect(
+            new Vector2(10, 10),
+            new Vector2(10, 10)));
 
+        SetLayoutGroupSize();
+
+        for (int i = 0; i < 5; i++)
+        {
+            newButton = Instantiate(buttonPrefab, verticalLayoutGroup.transform).gameObject;
+            newButtonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
+            newButtonText.SetText("Button text here");
+        }
+    }
+
+
+    private void SetLayoutGroupSize()
+    {
         var rectTransform = verticalLayoutGroup.GetComponent<RectTransform>();
 
         rectTransform.localScale = Vector3.one;
@@ -37,15 +53,39 @@ public class UIMaster : MonoBehaviour
 
         rectTransform.offsetMin = Vector2.zero;
         rectTransform.offsetMax = Vector2.zero;
-
-
         rectTransform.pivot = Vector2.zero;
-        rectTransform.anchorMin = Vector2.zero;
-        rectTransform.anchorMax = Vector2.one;
 
-        newButton = Instantiate(buttonPrefab, verticalLayoutGroup.transform).gameObject;
-        newButtonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
-        newButtonText.SetText("Button text here");
+
+        var mainCanvasRect = mainCanvas.GetComponent<RectTransform>().rect;
+
+        float rectxMin = 0;
+        float rectyMin = 0.5f;
+        float rectxMax = 1;
+        float rectyMax = 1;
+
+        if (mainCanvasRect.width < 800)
+        {
+            rectxMax = 1f / 2f;
+        }
+        else if (mainCanvasRect.width < 1200)
+        {
+            rectxMax = 1f / 3f;
+        }
+        else
+        {
+            rectxMax = 1f / 4f;
+        }
+
+        // X min, Y Min
+        rectTransform.anchorMin = new Vector2(rectxMin, rectyMin);
+        // X Max, Y Max
+        rectTransform.anchorMax = new Vector2(rectxMax, rectyMax);
+    }
+
+    private void OnRectTransformDimensionsChange()
+    {
+        Debug.Log("Canvas Size Changed");
+        SetLayoutGroupSize();
     }
 
     private void Update()
