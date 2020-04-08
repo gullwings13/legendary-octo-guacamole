@@ -15,20 +15,17 @@ public class UIMaster : MonoBehaviour
     private TextMeshProUGUI newButtonText;
 
     private void Start()
-    { 
+    {
         newButton = Instantiate(buttonPrefab, mainCanvas.transform).gameObject;
-       newButtonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
-       newButtonText.SetText("Button text here");
-       Vector3 pos = newButton.transform.position;
-       pos.x -= 10f;
-       newButton.transform.position = pos;
+        newButtonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
+        newButtonText.SetText("Button text here");
+        var rectTransform = newButton.GetComponent<RectTransform>();
     }
-
-
+    
     private void Update()
     {
-        Vector3 pos = newButton.transform.position;
-        pos.x -= 10f;
-        newButton.transform.position = pos;
+        // Vector3 pos = newButton.transform.position;
+        // pos.x -= 10f;
+        // newButton.transform.position = pos;
     }
 }
