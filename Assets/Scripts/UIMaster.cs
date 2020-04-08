@@ -11,10 +11,13 @@ public class UIMaster : MonoBehaviour
     public Canvas mainCanvas;
     public Button buttonPrefab;
 
+    private GameObject newButton;
+    private TextMeshProUGUI newButtonText;
+
     private void Start()
-    {
-       var newButton = Instantiate(buttonPrefab, mainCanvas.transform);
-       var newButtonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
+    { 
+        newButton = Instantiate(buttonPrefab, mainCanvas.transform).gameObject;
+       newButtonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
        newButtonText.SetText("Button text here");
        Vector3 pos = newButton.transform.position;
        pos.x -= 10f;
