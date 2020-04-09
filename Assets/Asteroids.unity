@@ -1177,7 +1177,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   asteroidPrefab: {fileID: 3198788842715732406, guid: a7611076a03db46298fd3a47229d8fbb,
     type: 3}
-  amount: 100
+  amount: 1
 --- !u!4 &887675327
 Transform:
   m_ObjectHideFlags: 0
@@ -1466,22 +1466,22 @@ PrefabInstance:
     - target: {fileID: 3035509197374410504, guid: 210fe3661553ded459d7f476a14f383a,
         type: 3}
       propertyPath: m_MinValue
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3035509197374410504, guid: 210fe3661553ded459d7f476a14f383a,
         type: 3}
       propertyPath: m_MaxValue
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3035509197374410504, guid: 210fe3661553ded459d7f476a14f383a,
         type: 3}
       propertyPath: m_WholeNumbers
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3035509197374410504, guid: 210fe3661553ded459d7f476a14f383a,
         type: 3}
       propertyPath: m_Value
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3035509197374410504, guid: 210fe3661553ded459d7f476a14f383a,
         type: 3}
