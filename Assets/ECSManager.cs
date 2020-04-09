@@ -10,18 +10,75 @@ public class ECSManager : MonoBehaviour
 {
     EntityManager manager;
     public GameObject asteroidPrefab;
-    const int numAsteroids = 110000;
+    private GameObjectConversionSettings settings;
+    private Entity convertedPrefab;
+    public const int initialNumberOfAsteroids = 1;
+    public int amount;
+    
 
-    // Start is called before the first frame update
+    public void Add()
+    {
+        CreateAsteroidEntities(amount);
+    }
+
+    public void Remove()
+    {
+        
+    }
+    
+    public void UpdateSlider(float input)
+    {
+        var asteroidCount = 1;
+        switch (input)
+        {
+            case 1:
+                asteroidCount = 1;
+                break;
+            case 2:
+                asteroidCount = 10;
+                break;
+            case 3:
+                asteroidCount = 50;
+                break;
+            case 4:
+                asteroidCount = 100;
+                break;
+            case 5:
+                asteroidCount = 500;
+                break;
+            case 6:
+                asteroidCount = 1000;
+                break;
+            case 7:
+                asteroidCount = 3333;
+                break;
+            case 8:
+                asteroidCount = 5000;
+                break;
+            case 9:
+                asteroidCount = 10000;
+                break;
+            case 10:
+                asteroidCount = 50000;
+                break;
+        }
+        amount = asteroidCount;
+    }
+
     void Start()
     {
         manager = World.DefaultGameObjectInjectionWorld.EntityManager;
-        var settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, null);
-        var prefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(asteroidPrefab, settings);
+        settings = GameObjectConversionSettings.FromWorld(World.DefaultGameObjectInjectionWorld, null);
+        convertedPrefab = GameObjectConversionUtility.ConvertGameObjectHierarchy(asteroidPrefab, settings);
 
-        for (int i = 0; i < numAsteroids; i++)
+        CreateAsteroidEntities(initialNumberOfAsteroids);
+    }
+
+    private void CreateAsteroidEntities(int numberOfAsteroids)
+    {
+        for (int i = 0; i < numberOfAsteroids; i++)
         {
-            var instance = manager.Instantiate(prefab);
+            var instance = manager.Instantiate(convertedPrefab);
             float x = Mathf.Sin(i) * UnityEngine.Random.Range(70, 770);
             float y = UnityEngine.Random.Range(-20f, 20f);
             float z = Mathf.Cos(i) * UnityEngine.Random.Range(70, 770);
@@ -48,37 +105,13 @@ public class ECSManager : MonoBehaviour
             float3 _axisAngle = position - pivot;
             float tweakRange = 0.1f;
             float tweakValue = UnityEngine.Random.Range(1 - tweakRange, 1 + tweakRange);
-            // float initialSpeed = 450f;
             float dist = math.distance(position, pivot);
-
-            // var rotationalSpeed =   (initialSpeed / (dist));
-            
-            
-            var rotationalSpeed =   math.sqrt((10 * 100) / dist);
-            
-            
-            // Debug.Log(rotationalSpeed);
-
-            // var initialVector = math.mul(quaternion.AxisAngle(
-            //     new float3(0, 1, 0),
-            //     // (_axisAngle / _axisAngle), 
-            //     // 0.000001f
-            //     1f
-            // ), position - pivot);
-            // // + position;
-            //
-            //
-            // var initalVectorNormed = math.normalize(initialVector);
-
+            var rotationalSpeed = math.sqrt((10 * 100) / dist);
             var initialVector = math.cross(new float3(0, 1, 0), math.normalize(position));
-            
-            // Debug.Log(initalVectorNormed);
+
             manager.SetComponentData(instance, new AsteroidData
             {
                 axisAngle = _axisAngle,
-                // velocity = new float3(UnityEngine.Random.Range(-initialSpeed, initialSpeed),0,UnityEngine.Random.Range(-initialSpeed, initialSpeed) )});
-                // velocity = initialVector
-                // velocity = float3.zero
                 velocity = initialVector * rotationalSpeed * tweakValue
             });
         }

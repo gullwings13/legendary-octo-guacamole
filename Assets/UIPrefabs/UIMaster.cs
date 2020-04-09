@@ -16,13 +16,59 @@ public class UIMaster : MonoBehaviour
     public GameObject verticalPanel;
     public GameObject horizontalPanel;
     public Boolean responsive;
+    public TextMeshProUGUI sliderText;
     
     private GameObject verticalLayoutGroup;
 
+    
 
     public void AppQuit()
     {
         Application.Quit();
+    }
+
+    public void Enlarge()
+    {
+        
+    }
+
+    public void UpdateSlider(float input)
+    {
+        var asteroidCount = 1;
+        switch (input)
+        {
+            case 1:
+                asteroidCount = 1;
+                break;
+            case 2:
+                asteroidCount = 10;
+                break;
+            case 3:
+                asteroidCount = 50;
+                break;
+            case 4:
+                asteroidCount = 100;
+                break;
+            case 5:
+                asteroidCount = 500;
+                break;
+            case 6:
+                asteroidCount = 1000;
+                break;
+            case 7:
+                asteroidCount = 3333;
+                break;
+            case 8:
+                asteroidCount = 5000;
+                break;
+            case 9:
+                asteroidCount = 10000;
+                break;
+            case 10:
+                asteroidCount = 50000;
+                break;
+        }
+        sliderText.SetText("Asteroids: "+asteroidCount.ToString());
     }
     
     
@@ -136,7 +182,6 @@ public class UIMaster : MonoBehaviour
 
     private void OnRectTransformDimensionsChange()
     {
-        Debug.Log("Canvas Size Changed");
         if (verticalLayoutGroup != null)
         {
             SetLayoutGroupSize(responsive);
