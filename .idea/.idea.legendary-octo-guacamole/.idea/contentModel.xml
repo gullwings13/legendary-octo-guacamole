@@ -39,8 +39,10 @@
           <e p="CreateTankSystem.cs" t="Include" />
           <e p="CubeData.cs" t="Include" />
           <e p="CubeMoveSystem.cs" t="Include" />
+          <e p="DestroySystem.cs" t="Include" />
           <e p="ECSInterface.cs" t="Include" />
           <e p="ECSManagerTwo.cs" t="Include" />
+          <e p="GameDataManager.cs" t="Include" />
           <e p="LightRotation.cs" t="Include" />
           <e p="Move.cs" t="Include" />
           <e p="MoveSystem.cs" t="Include" />

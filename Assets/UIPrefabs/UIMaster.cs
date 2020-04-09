@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,50 +28,12 @@ public class UIMaster : MonoBehaviour
         Application.Quit();
     }
 
-    public void Enlarge()
-    {
-        
-    }
-
     public void UpdateSlider(float input)
     {
-        var asteroidCount = 1;
-        switch (input)
-        {
-            case 1:
-                asteroidCount = 1;
-                break;
-            case 2:
-                asteroidCount = 10;
-                break;
-            case 3:
-                asteroidCount = 50;
-                break;
-            case 4:
-                asteroidCount = 100;
-                break;
-            case 5:
-                asteroidCount = 500;
-                break;
-            case 6:
-                asteroidCount = 1000;
-                break;
-            case 7:
-                asteroidCount = 3333;
-                break;
-            case 8:
-                asteroidCount = 5000;
-                break;
-            case 9:
-                asteroidCount = 10000;
-                break;
-            case 10:
-                asteroidCount = 50000;
-                break;
-        }
+        var asteroidCount = (int) math.round(math.pow(10, input));
+        GameDataManager.instance.addRemoveAmount = asteroidCount;
         sliderText.SetText("Asteroids: "+asteroidCount.ToString());
     }
-    
     
     [EasyButtons.Button]
     private void InitVertGroup()
