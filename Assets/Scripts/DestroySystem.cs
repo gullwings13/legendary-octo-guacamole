@@ -52,7 +52,7 @@ public class DestroySystem : JobComponentSystem {
 
         public void Execute(Entity entity, int index, ref AsteroidData c0)
         {
-            if(index-1 > limit)
+            if(index > limit)
             {
                 //destroy asteroid
                 CommandBuffer.DestroyEntity(index, entity);

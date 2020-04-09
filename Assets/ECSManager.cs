@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using Unity.Entities;
 using Unity.Mathematics;
@@ -11,6 +12,7 @@ public class ECSManager : MonoBehaviour
 
     public GameObject asteroidPrefab;
     public const int initialNumberOfAsteroids = 1;
+    public TextMeshProUGUI entityCount;
     // public int amount;
     
     private EntityManager manager;
@@ -18,6 +20,14 @@ public class ECSManager : MonoBehaviour
     private GameObjectConversionSettings settings;
     private Entity convertedPrefab;
 
+    public float distanceBase = 20;
+    public float minDistance = 50;
+    public float maxDistance = 1000;
+    public float fieldHeight = 20;
+    public float tweakRange = 0.1f;
+    public float simSpeed = 1f;
+    public float relativeSize = 1f;
+    
     public void Add()
     {
         var additionalAsteroids = GameDataManager.instance.addRemoveAmount;
@@ -39,11 +49,10 @@ public class ECSManager : MonoBehaviour
         entityQuery = manager.CreateEntityQuery(ComponentType.ReadOnly<AsteroidData>());
         CreateAsteroidEntities(initialNumberOfAsteroids);
     }
-
-
+    
     private void Update()
     {
-        Debug.Log( entityQuery.CalculateEntityCount());
+        entityCount.SetText(entityQuery.CalculateEntityCount().ToString());
     }
 
     private void CreateAsteroidEntities(int numberOfAsteroids)
@@ -76,7 +85,6 @@ public class ECSManager : MonoBehaviour
 
             float3 pivot = new float3(0, 0, 0);
             float3 _axisAngle = position - pivot;
-            float tweakRange = 0.1f;
             float tweakValue = UnityEngine.Random.Range(1 - tweakRange, 1 + tweakRange);
             float dist = math.distance(position, pivot);
             var rotationalSpeed = math.sqrt((10 * 100) / dist);
