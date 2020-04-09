@@ -1,9 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ContentModelStore">
-    <e p="$PROJECT_DIR$" t="IncludeRecursive">
+    <e p="C:\Users\Trev\.Rider2019.3\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Trev\.Rider2019.3\system\resharper-host\local\Transient\ReSharperHost\v193\SolutionCaches\_legendary-octo-guacamole.-1301223180.00" t="ExcludeRecursive" />
+    <e p="C:\Users\Trev\Documents\!GameDev\legendary-octo-guacamole" t="IncludeRecursive">
+      <e p="Assembly-CSharp-Editor.csproj" t="IncludeRecursive" />
       <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
       <e p="Assets" t="Include">
+        <e p="EasyButtons" t="Include">
+          <e p="ButtonAttribute.cs" t="Include" />
+          <e p="Editor" t="Include">
+            <e p="ButtonEditor.cs" t="Include" />
+            <e p="EasyButtonsEditorExtensions.cs" t="Include" />
+          </e>
+          <e p="Examples" t="Include">
+            <e p="ButtonsExample" t="Include">
+              <e p="ButtonsExample.cs" t="Include" />
+            </e>
+            <e p="CustomEditorButtonsExample" t="Include">
+              <e p="CustomEditorButtonsExample.cs" t="Include" />
+              <e p="Editor" t="Include">
+                <e p="CustomEditorButtonsExampleEditor.cs" t="Include" />
+              </e>
+            </e>
+            <e p="ScriptableObjectExample" t="Include">
+              <e p="ScriptableObjectExample.cs" t="Include" />
+            </e>
+          </e>
+        </e>
         <e p="ECSManager.cs" t="Include" />
         <e p="Open_Sans" t="Include">
           <e p="LICENSE.txt" t="Include" />
@@ -60,9 +84,7 @@
       <e p="legendary-octo-guacamole.sln" t="IncludeFlat" />
       <e p="obj" t="ExcludeRecursive" />
       <e p="Packages" t="ExcludeRecursive" />
-      <e p="Temp/bin" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
     </e>
-    <e p="$USER_HOME$/Library/Caches/Rider2019.3/extResources" t="IncludeRecursive" />
-    <e p="$USER_HOME$/Library/Caches/Rider2019.3/resharper-host/local/Transient/ReSharperHost/v193/SolutionCaches/_legendary-octo-guacamole.994507596.00" t="ExcludeRecursive" />
   </component>
 </project>

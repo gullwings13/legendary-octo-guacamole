@@ -9,52 +9,87 @@ using UnityEngine.UI;
 public class UIMaster : MonoBehaviour
 {
     public Canvas mainCanvas;
-    public Button buttonPrefab;
-
-    private GameObject newButton;
-    private TextMeshProUGUI newButtonText;
-
+    public GameObject verticalLayoutGroupPrefab;
+    public Button verticalButtonPrefab;
+    public Button horizontalButtonPrefab;
+    public GameObject sliderInPanelPrefab;
+    public GameObject verticalPanel;
+    public GameObject horizontalPanel;
+    public Boolean responsive;
+    
     private GameObject verticalLayoutGroup;
 
-    private void Start()
+
+    public void AppQuit()
     {
-        verticalLayoutGroup = new GameObject("VerticalLayoutGroup", typeof(VerticalLayoutGroup));
-        verticalLayoutGroup.transform.SetParent(mainCanvas.transform);
-        var vertGroup = verticalLayoutGroup.GetComponent<VerticalLayoutGroup>();
-        vertGroup.childControlHeight = true;
-        vertGroup.childControlWidth = true;
-        vertGroup.childForceExpandHeight = true;
-        vertGroup.childForceExpandWidth = true;
-        vertGroup.padding.Add(new Rect(
-            new Vector2(10, 10),
-            new Vector2(10, 10)));
-
-        SetLayoutGroupSize();
-
-        for (int i = 0; i < 5; i++)
-        {
-            newButton = Instantiate(buttonPrefab, verticalLayoutGroup.transform).gameObject;
-            newButtonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
-            newButtonText.SetText("Button text here");
-        }
+        Application.Quit();
+    }
+    
+    
+    [EasyButtons.Button]
+    private void InitVertGroup()
+    {
+        SetupLayoutGroup();
+    }
+    
+    [EasyButtons.Button]
+    private void BuildButtonGUI()
+    {
+        BuildButton(verticalLayoutGroup, "Button Test");
+    }
+    
+    [EasyButtons.Button]
+    private void BuildSliderGUI()
+    {
+        BuildSlider(verticalLayoutGroup, "Slider Test");
+    }
+    
+    [EasyButtons.Button]
+    private void DestroyVertGroup()
+    {
+        DestroyUI();
+    }
+    
+    private void SetupLayoutGroup()
+    {
+        // verticalLayoutGroup = new GameObject("VerticalLayoutGroup", typeof(VerticalLayoutGroup));
+        verticalLayoutGroup = Instantiate(verticalLayoutGroupPrefab, mainCanvas.transform);
+        // verticalLayoutGroup.transform.SetParent(mainCanvas.transform);
+        var vertGroupVLG = verticalLayoutGroup.GetComponent<VerticalLayoutGroup>();
+        vertGroupVLG.childControlHeight = false;
+        vertGroupVLG.childControlWidth = false;
+        vertGroupVLG.childForceExpandHeight = false;
+        vertGroupVLG.childForceExpandWidth = false;
+        vertGroupVLG.padding = new RectOffset(10, 10, 10, 10);
+        vertGroupVLG.childAlignment = TextAnchor.UpperCenter;
+        vertGroupVLG.spacing = 10;
+            
+        SetLayoutGroupSize(responsive);
     }
 
+    private void BuildButton(GameObject verticalLayoutGroup, string buttonString)
+    {
+        GameObject newButton = Instantiate(verticalButtonPrefab, verticalLayoutGroup.transform).gameObject;
+        TextMeshProUGUI newButtonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
+        newButtonText.SetText(buttonString);
+    }
+    
+    private void BuildSlider(GameObject verticalLayoutGroup, string sliderLabelString)
+    {
+        GameObject newSlider = Instantiate(sliderInPanelPrefab, verticalLayoutGroup.transform).gameObject;
+        TextMeshProUGUI newSliderText = newSlider.GetComponentInChildren<TextMeshProUGUI>();
+        newSliderText.SetText(sliderLabelString);
+    }
+    
+    private void DestroyUI()
+    {
+        GameObject.DestroyImmediate(verticalLayoutGroup.gameObject);
+    }
 
-    private void SetLayoutGroupSize()
+    private void SetLayoutGroupSize(Boolean responsive)
     {
         var rectTransform = verticalLayoutGroup.GetComponent<RectTransform>();
-
         rectTransform.localScale = Vector3.one;
-
-        // rectTransform.offsetMin = new Vector2(0, 0); 
-        // // new Vector2(left, bottom);
-        // rectTransform.offsetMax = new Vector2(-0, -0);
-        // // new Vector2(-right, -top);
-
-        rectTransform.offsetMin = Vector2.zero;
-        rectTransform.offsetMax = Vector2.zero;
-        rectTransform.pivot = Vector2.zero;
-
 
         var mainCanvasRect = mainCanvas.GetComponent<RectTransform>().rect;
 
@@ -63,35 +98,48 @@ public class UIMaster : MonoBehaviour
         float rectxMax = 1;
         float rectyMax = 1;
 
-        if (mainCanvasRect.width < 800)
+        if (responsive)
         {
-            rectxMax = 1f / 2f;
-        }
-        else if (mainCanvasRect.width < 1200)
-        {
-            rectxMax = 1f / 3f;
+            if (mainCanvasRect.width < 800)
+            {
+                rectxMax = 1f / 2f;
+            }
+            else if (mainCanvasRect.width < 1200)
+            {
+                rectxMax = 1f / 3f;
+            }
+            else
+            {
+                rectxMax = 1f / 4f;
+            }
+            rectTransform.anchorMin = new Vector2(rectxMin, rectyMin);
+            rectTransform.anchorMax = new Vector2(rectxMax, rectyMax);
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.zero;
+            rectTransform.pivot = Vector2.zero;
         }
         else
         {
-            rectxMax = 1f / 4f;
+            // Top Left
+            rectxMin = 0f;
+            rectyMin = 1f;
+            rectxMax = 0f;
+            rectyMax = 1f;
+            rectTransform.pivot = Vector2.up;
+            rectTransform.anchorMin = new Vector2(rectxMin, rectyMin);
+            rectTransform.anchorMax = new Vector2(rectxMax, rectyMax);
+            rectTransform.offsetMin = Vector2.zero;
+            rectTransform.offsetMax = Vector2.up*1000 + Vector2.right*200;
+            rectTransform.anchoredPosition = Vector2.zero;
         }
-
-        // X min, Y Min
-        rectTransform.anchorMin = new Vector2(rectxMin, rectyMin);
-        // X Max, Y Max
-        rectTransform.anchorMax = new Vector2(rectxMax, rectyMax);
     }
 
     private void OnRectTransformDimensionsChange()
     {
         Debug.Log("Canvas Size Changed");
-        SetLayoutGroupSize();
-    }
-
-    private void Update()
-    {
-        // Vector3 pos = newButton.transform.position;
-        // pos.x -= 10f;
-        // newButton.transform.position = pos;
+        if (verticalLayoutGroup != null)
+        {
+            SetLayoutGroupSize(responsive);
+        }
     }
 }
