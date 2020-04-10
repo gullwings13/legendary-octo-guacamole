@@ -6,6 +6,7 @@ using UnityEngine;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
+using UnityEngine.Rendering;
 
 public class ECSManager : MonoBehaviour
 {
@@ -22,11 +23,74 @@ public class ECSManager : MonoBehaviour
 
     public float distanceBase = 20;
     public float minDistance = 50;
-    public float maxDistance = 1000;
+    public float maxDistance = 750;
     public float fieldHeight = 20;
     public float tweakRange = 0.1f;
-    public float simSpeed = 1f;
     public float relativeSize = 1f;
+
+
+    public TextMeshProUGUI minDistanceText;
+    public TextMeshProUGUI maxDistanceText;
+    public TextMeshProUGUI fieldHeightText;
+    public TextMeshProUGUI tweakRangeText;
+    
+    public TextMeshProUGUI relativeSizeText;
+    public TextMeshProUGUI asteroidsToAddText;
+    public TextMeshProUGUI simSpeedText;
+    public void AdjustMinDistance(float value)
+    {
+        // 1 to 1000
+        value = Mathf.Round(value * 100f) / 100f;
+        minDistance = value;
+        minDistanceText.SetText(value.ToString());
+    }
+    
+    public void AdjustMaxDistance(float value)
+    {
+        // 1 to 1000
+        value = Mathf.Round(value * 100f) / 100f;
+        maxDistance = value;
+        maxDistanceText.SetText(value.ToString());
+    }
+    
+    public void AdjustFieldHeight(float value)
+    {
+        // 0 to 100
+        value = Mathf.Round(value * 100f) / 100f;
+        fieldHeight = value;
+        fieldHeightText.SetText(value.ToString());
+    }
+    
+    public void AdjustTweakRange(float value)
+    {
+        // 0 to 10
+        value = Mathf.Round(value * 100f) / 100f;
+        tweakRange = value;
+        tweakRangeText.SetText(value.ToString());
+    }
+    
+    public void AdjustSize(float value)
+    {
+        // 0.1 to 10
+        value = Mathf.Round(value * 100f) / 100f;
+        relativeSize = value;
+        relativeSizeText.SetText(value.ToString());
+    }
+    
+    public void AdjustAsteroidCount(float value)
+    {
+        var asteroidCount = (int) math.round(math.pow(10, value));
+        GameDataManager.instance.addRemoveAmount = asteroidCount;
+        asteroidsToAddText.SetText(asteroidCount.ToString());
+    }
+    
+    public void AdjustSimSpeed(float value)
+    {
+        // 0.1 to 3
+        value = Mathf.Round(value * 100f) / 100f;
+        GameDataManager.instance.timeScale = value;
+        simSpeedText.SetText(value.ToString());
+    }
     
     public void Add()
     {
@@ -61,15 +125,15 @@ public class ECSManager : MonoBehaviour
         for (int i = 0; i < numberOfAsteroids; i++)
         {
             var instance = manager.Instantiate(convertedPrefab);
-            float x = Mathf.Sin(i) * UnityEngine.Random.Range(70, 770);
-            float y = UnityEngine.Random.Range(-20f, 20f);
-            float z = Mathf.Cos(i) * UnityEngine.Random.Range(70, 770);
+            float x = Mathf.Sin(i) * UnityEngine.Random.Range(distanceBase+minDistance, distanceBase+maxDistance);
+            float y = UnityEngine.Random.Range(-fieldHeight, fieldHeight);
+            float z = Mathf.Cos(i) * UnityEngine.Random.Range(distanceBase+minDistance, distanceBase+maxDistance);
             float3 position = transform.TransformPoint(new float3(x, y, z));
             manager.SetComponentData(instance, new Translation {Value = position});
 
             var scaleDiff = 5f;
 
-            var maxSize = math.distance(position, new Vector3(0, 0, 0)) / 3;
+            var maxSize = math.distance(position, new Vector3(0, 0, 0)) / 3 * relativeSize;
 
             var scaleBase = UnityEngine.Random.Range(1f, maxSize);
             var scalexdiff = UnityEngine.Random.Range(0, scaleDiff);
@@ -93,7 +157,7 @@ public class ECSManager : MonoBehaviour
             manager.SetComponentData(instance, new AsteroidData
             {
                 axisAngle = _axisAngle,
-                velocity = initialVector * rotationalSpeed * tweakValue
+                velocity = initialVector * rotationalSpeed * tweakValue * Time.fixedDeltaTime * 50
             });
         }
     }

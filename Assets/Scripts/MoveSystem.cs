@@ -12,7 +12,7 @@ public class MoveSystem : JobComponentSystem
     [BurstCompile]
     protected override JobHandle OnUpdate(JobHandle inputDeps)
     {
-        float deltaTime = Time.DeltaTime;
+        float deltaTime = Time.fixedDeltaTime * GameDataManager.instance.timeScale * 50;
         float3 targetLocation = new float3(0, 0, 0);
 
         var jobHandle = Entities.WithName("MoveSystem").ForEach(
@@ -22,10 +22,10 @@ public class MoveSystem : JobComponentSystem
 
                 float dist = math.distance(position.Value, targetLocation);
                 float3 direction = math.normalize(diff);
-                float3 movementVector = asteroidData.velocity + -direction * (10 * (1 * 100 / (dist * dist)));
+                float3 movementVector = asteroidData.velocity + (-direction * (10 * (1 * 100 / (dist * dist)))*deltaTime);
                 asteroidData.velocity = movementVector;
 
-                position.Value += asteroidData.velocity;
+                position.Value += asteroidData.velocity * deltaTime;
             }).Schedule(inputDeps);
 
         return jobHandle;

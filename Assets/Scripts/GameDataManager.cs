@@ -10,6 +10,7 @@ public class GameDataManager : MonoBehaviour
     public int AsteroidCount => asteroidCount;
 
     public int addRemoveAmount = 1;
+    public float timeScale = 1;
     
     public void adjustAsteroidCount(int asteroidAdjustAmount)
     {

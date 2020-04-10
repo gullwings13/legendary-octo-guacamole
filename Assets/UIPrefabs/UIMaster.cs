@@ -168,12 +168,7 @@ public class UIMaster : MonoBehaviour
         return numberToCheckBoundsFor;
     }
 
-    public void UpdateSlider(float input)
-    {
-        var asteroidCount = (int) math.round(math.pow(10, input));
-        GameDataManager.instance.addRemoveAmount = asteroidCount;
-        sliderText.SetText("Asteroids: " + asteroidCount.ToString());
-    }
+
 
     [EasyButtons.Button]
     private void InitVertGroup()
