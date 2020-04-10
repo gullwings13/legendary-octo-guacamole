@@ -18,11 +18,13 @@ public class UIMaster : MonoBehaviour
     public GameObject horizontalPanel;
     public Boolean randomColor;
     public TextMeshProUGUI sliderText;
-
-    private GameObject verticalLayoutGroup;
-
     public GameObject[] uiElementColorArray;
-
+    public GameObject verticalLayoutGroup;
+    public TextMeshProUGUI menuText;
+    
+    private Boolean menuOpen = false;
+    private RectTransform vlgRectTransform;
+    
     public void AppQuit()
     {
         Application.Quit();
@@ -31,6 +33,13 @@ public class UIMaster : MonoBehaviour
     private void Awake()
     {
         ColorizeGameObjectArray();
+        vlgRectTransform = verticalLayoutGroup.GetComponent<RectTransform>();
+    }
+
+    private void Start()
+    {
+        ToggleMenu();
+        ToggleMenu();
     }
 
     [EasyButtons.Button]
@@ -138,6 +147,21 @@ public class UIMaster : MonoBehaviour
         }
     }
 
+    public void ToggleMenu()
+    {
+        menuOpen = !menuOpen;
+        if (menuOpen)
+        {
+            menuText.SetText("\uf104");
+            vlgRectTransform.anchoredPosition = Vector2.zero;
+        }
+        else
+        {
+            menuText.SetText("\uf105");
+            vlgRectTransform.anchoredPosition = Vector2.left*200f;
+        }
+    }
+    
     private float RandFloat()
     {
         // return random float for adjusting color
@@ -170,65 +194,65 @@ public class UIMaster : MonoBehaviour
 
 
 
-    [EasyButtons.Button]
-    private void InitVertGroup()
-    {
-        SetupLayoutGroup();
-    }
+    // [EasyButtons.Button]
+    // private void InitVertGroup()
+    // {
+    //     SetupLayoutGroup();
+    // }
 
-    [EasyButtons.Button]
-    private void BuildButtonGUI()
-    {
-        BuildButton(verticalLayoutGroup, "Button Test");
-    }
+    // [EasyButtons.Button]
+    // private void BuildButtonGUI()
+    // {
+    //     BuildButton(verticalLayoutGroup, "Button Test");
+    // }
+    //
+    // [EasyButtons.Button]
+    // private void BuildSliderGUI()
+    // {
+    //     BuildSlider(verticalLayoutGroup, "Slider Test");
+    // }
 
-    [EasyButtons.Button]
-    private void BuildSliderGUI()
-    {
-        BuildSlider(verticalLayoutGroup, "Slider Test");
-    }
+    // [EasyButtons.Button]
+    // private void DestroyVertGroup()
+    // {
+    //     DestroyUI();
+    // }
 
-    [EasyButtons.Button]
-    private void DestroyVertGroup()
-    {
-        DestroyUI();
-    }
+    // private void SetupLayoutGroup()
+    // {
+    //     // verticalLayoutGroup = new GameObject("VerticalLayoutGroup", typeof(VerticalLayoutGroup));
+    //     verticalLayoutGroup = Instantiate(verticalLayoutGroupPrefab, mainCanvas.transform);
+    //     // verticalLayoutGroup.transform.SetParent(mainCanvas.transform);
+    //     var vertGroupVLG = verticalLayoutGroup.GetComponent<VerticalLayoutGroup>();
+    //     vertGroupVLG.childControlHeight = false;
+    //     vertGroupVLG.childControlWidth = false;
+    //     vertGroupVLG.childForceExpandHeight = false;
+    //     vertGroupVLG.childForceExpandWidth = false;
+    //     vertGroupVLG.padding = new RectOffset(10, 10, 10, 10);
+    //     vertGroupVLG.childAlignment = TextAnchor.UpperCenter;
+    //     vertGroupVLG.spacing = 10;
+    //
+    //     SetLayoutGroupSize(false);
+    // }
 
-    private void SetupLayoutGroup()
-    {
-        // verticalLayoutGroup = new GameObject("VerticalLayoutGroup", typeof(VerticalLayoutGroup));
-        verticalLayoutGroup = Instantiate(verticalLayoutGroupPrefab, mainCanvas.transform);
-        // verticalLayoutGroup.transform.SetParent(mainCanvas.transform);
-        var vertGroupVLG = verticalLayoutGroup.GetComponent<VerticalLayoutGroup>();
-        vertGroupVLG.childControlHeight = false;
-        vertGroupVLG.childControlWidth = false;
-        vertGroupVLG.childForceExpandHeight = false;
-        vertGroupVLG.childForceExpandWidth = false;
-        vertGroupVLG.padding = new RectOffset(10, 10, 10, 10);
-        vertGroupVLG.childAlignment = TextAnchor.UpperCenter;
-        vertGroupVLG.spacing = 10;
+    // private void BuildButton(GameObject verticalLayoutGroup, string buttonString)
+    // {
+    //     GameObject newButton = Instantiate(verticalButtonPrefab, verticalLayoutGroup.transform).gameObject;
+    //     TextMeshProUGUI newButtonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
+    //     newButtonText.SetText(buttonString);
+    // }
 
-        SetLayoutGroupSize(false);
-    }
+    // private void BuildSlider(GameObject verticalLayoutGroup, string sliderLabelString)
+    // {
+    //     GameObject newSlider = Instantiate(sliderInPanelPrefab, verticalLayoutGroup.transform).gameObject;
+    //     TextMeshProUGUI newSliderText = newSlider.GetComponentInChildren<TextMeshProUGUI>();
+    //     newSliderText.SetText(sliderLabelString);
+    // }
 
-    private void BuildButton(GameObject verticalLayoutGroup, string buttonString)
-    {
-        GameObject newButton = Instantiate(verticalButtonPrefab, verticalLayoutGroup.transform).gameObject;
-        TextMeshProUGUI newButtonText = newButton.GetComponentInChildren<TextMeshProUGUI>();
-        newButtonText.SetText(buttonString);
-    }
-
-    private void BuildSlider(GameObject verticalLayoutGroup, string sliderLabelString)
-    {
-        GameObject newSlider = Instantiate(sliderInPanelPrefab, verticalLayoutGroup.transform).gameObject;
-        TextMeshProUGUI newSliderText = newSlider.GetComponentInChildren<TextMeshProUGUI>();
-        newSliderText.SetText(sliderLabelString);
-    }
-
-    private void DestroyUI()
-    {
-        GameObject.DestroyImmediate(verticalLayoutGroup.gameObject);
-    }
+    // private void DestroyUI()
+    // {
+    //     GameObject.DestroyImmediate(verticalLayoutGroup.gameObject);
+    // }
 
     private void SetLayoutGroupSize(Boolean responsive)
     {
